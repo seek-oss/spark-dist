@@ -1,6 +1,6 @@
 # Spark dist
 
-The purpose of this Spark distribution is to allow accessing S3 with AWS SAML authentication.
+The purpose of this Spark distribution is to allow accessing S3 in general, and AWS SAML temporary credential in particular.
 
 S3 support is provided by S3A from [hadoop-aws](https://hadoop.apache.org/docs/r3.1.0/hadoop-aws/tools/hadoop-aws/index.html).
 To read from S3 using S3A, use the URI prefix `s3a`, eg: ```spark.read.parquet("s3a://big-bucket/big-data/")```
