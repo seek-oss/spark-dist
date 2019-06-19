@@ -16,11 +16,11 @@ make install
  
 Start spark with the `ProfileCredentialsProvider`, eg:
 ```bash
-make run pyspark
+make pyspark
 ```
 or
 ```bash
-make run spark-shell
+make spark-shell
 ```
 You can this use s3a, eg:
 ```python
