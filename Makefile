@@ -18,8 +18,8 @@ venv: $(venv)
 ## build and install virtual env with s3a jars
 install: $(venv)
 	./gradlew jars
-	rm -rf $(venv)/lib/python3.7/site-packages/pyspark/jars
-	mv jars $(venv)/lib/python3.7/site-packages/pyspark/
+	rm -rf $(venv)/lib/*/site-packages/pyspark/jars
+	mv jars $(venv)/lib/*/site-packages/pyspark/
 
 ## pyspark
 pyspark:
