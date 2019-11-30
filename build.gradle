@@ -11,7 +11,7 @@ configurations.all {
     exclude group: 'commons-logging', module: 'commons-logging'
     resolutionStrategy {
         // because hadoop-common brings different jackson versions
-        force "com.fasterxml.jackson.core:jackson-core:2.7.8"
+        force "com.fasterxml.jackson.core:jackson-core:2.10.1"
         force "com.fasterxml.jackson.core:jackson-databind:2.7.8"
         force "com.fasterxml.jackson.module:jackson-module-scala_2.11:2.7.8"
     }
