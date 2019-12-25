@@ -7,6 +7,7 @@ repositories {
     mavenLocal()
 }
 
+
 configurations.all {
     exclude group: 'commons-logging', module: 'commons-logging'
     resolutionStrategy {
@@ -18,10 +19,14 @@ configurations.all {
 }
 
 dependencies {
-    runtime "com.amazonaws:aws-java-sdk-s3:${awsVersion}"
-    runtime "org.apache.spark:spark-core_${scalaBuildVersion}:2.3.1"
-    runtime "org.apache.spark:spark-sql_${scalaBuildVersion}:2.3.1"
-    runtime "org.apache.spark:spark-repl_${scalaBuildVersion}:2.3.1"
+
+    def sparkVersion = "2.3.1"
+    def scalaBuildVersion = "2.11"
+
+    runtime "com.amazonaws:aws-java-sdk-s3:1.11.526"
+    runtime "org.apache.spark:spark-core_${scalaBuildVersion}:${sparkVersion}"
+    runtime "org.apache.spark:spark-sql_${scalaBuildVersion}:${sparkVersion}"
+    runtime "org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}"
 
     runtime("org.apache.hadoop:hadoop-aws:3.1.1")
     runtime("org.apache.hadoop:hadoop-common:3.1.1")
