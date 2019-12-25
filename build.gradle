@@ -23,13 +23,13 @@ dependencies {
     def sparkVersion = "2.3.1"
     def scalaBuildVersion = "2.11"
 
-    runtime "com.amazonaws:aws-java-sdk-s3:1.11.526"
-    runtime "org.apache.spark:spark-core_${scalaBuildVersion}:${sparkVersion}"
-    runtime "org.apache.spark:spark-sql_${scalaBuildVersion}:${sparkVersion}"
-    runtime "org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}"
+    runtimeOnly "com.amazonaws:aws-java-sdk-s3:1.11.526"
+    runtimeOnly "org.apache.spark:spark-core_${scalaBuildVersion}:${sparkVersion}"
+    runtimeOnly "org.apache.spark:spark-sql_${scalaBuildVersion}:${sparkVersion}"
+    runtimeOnly "org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}"
 
-    runtime("org.apache.hadoop:hadoop-aws:3.1.1")
-    runtime("org.apache.hadoop:hadoop-common:3.1.1")
+    runtimeOnly "org.apache.hadoop:hadoop-aws:3.1.1"
+    runtimeOnly "org.apache.hadoop:hadoop-common:3.1.1"
 }
 
 task jars() {
