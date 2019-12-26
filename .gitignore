@@ -1,3 +1,5 @@
 jars*/
 .gradle/
 .idea/
+build/
+out/
