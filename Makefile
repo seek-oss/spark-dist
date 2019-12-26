@@ -34,3 +34,8 @@ pyspark:
 spark-shell:
 	source $(venv)/bin/activate && \
 	spark-shell --driver-java-options $(options)
+
+## test
+test:
+	./gradlew test
+
