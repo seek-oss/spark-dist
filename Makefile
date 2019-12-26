@@ -23,12 +23,14 @@ install: $(venv)
 	rm -rf $(venv)/lib/*/site-packages/pyspark/jars
 	mv jars $(venv)/lib/*/site-packages/pyspark/
 
+options = "-Dspark.hadoop.fs.s3a.aws.credentials.provider=com.amazonaws.auth.profile.ProfileCredentialsProvider -Dspark.hadoop.fs.s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"
+
 ## pyspark
 pyspark:
 	source $(venv)/bin/activate && \
-	pyspark --driver-java-options "-Dspark.hadoop.fs.s3a.aws.credentials.provider=com.amazonaws.auth.profile.ProfileCredentialsProvider"
+	pyspark --driver-java-options $(options)
 
 ## spark-shell
 spark-shell:
 	source $(venv)/bin/activate && \
-	spark-shell --driver-java-options "-Dspark.hadoop.fs.s3a.aws.credentials.provider=com.amazonaws.auth.profile.ProfileCredentialsProvider"
+	spark-shell --driver-java-options $(options)
