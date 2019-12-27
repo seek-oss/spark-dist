@@ -23,7 +23,7 @@ configurations.all {
 
 dependencies {
 
-    def sparkVersion = "2.3.2"
+    def sparkVersion = "2.4.4"
     def scalaBuildVersion = "2.11"
 
     implementation "com.amazonaws:aws-java-sdk-s3:1.11.526"
