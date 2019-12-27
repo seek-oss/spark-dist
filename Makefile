@@ -37,5 +37,5 @@ spark-shell:
 
 ## test
 test:
-	./gradlew test
+	./gradlew printJars test
 

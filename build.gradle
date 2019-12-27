@@ -49,3 +49,8 @@ task jars() {
         into 'jars/'
     }
 }
+
+// prints out jars for recording in the build log
+task printJars {
+    sourceSets.main.runtimeClasspath.sort().each { println it }
+}

@@ -4,22 +4,6 @@ This distribution of Spark bundles [hadoop-aws 3.1](https://hadoop.apache.org/do
 This provides S3 access with the ability to use any AWSCredentialsProvider, STS temporary credentials 
 and other newer features.
 
-To read from S3 use the URI prefix `s3a`, eg: 
-```
-spark.read.parquet("s3a://big-bucket/big-data/")
-```
-Or set the hadoop S3 implementation: 
-```
-spark.hadoop.fs.s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
-```
-This will allow you to use `s3://`
-
-AWS credentials are loaded from environment variables or the instance profile by default.
-To load credentials from your profile (ie: `~/.aws/config` and `~/.aws/credentials`) set:
-```
-spark.hadoop.fs.s3a.aws.credentials.provider=com.amazonaws.auth.profile.ProfileCredentialsProvider
-```
-
 ## Rationale
 
 Common practice is to use hadoop-aws 2.7.3 as follows: 
@@ -28,7 +12,7 @@ Common practice is to use hadoop-aws 2.7.3 as follows:
 pyspark --packages "org.apache.hadoop:hadoop-aws:2.7.3" --driver-java-options "-Dspark.hadoop.fs.s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"
 ```
 However later versions of hadoop-aws cannot be used this way without errors. 
-This distribution uses gradle to resolve a correct set of hadoop-aws dependencies that work with Spark.  
+This distribution uses gradle to resolve a correct set of newer hadoop-aws dependencies that work with Spark.  
 
 Later versions of hadoop-aws contain the following new features:
 * [2.8 release line](http://hadoop.apache.org/docs/r2.8.0/index.html) contains S3A improvements to 
