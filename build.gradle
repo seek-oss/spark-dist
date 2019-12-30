@@ -11,38 +11,25 @@ repositories {
 }
 
 
-configurations.all {
-    resolutionStrategy {
-        // because hadoop-common brings different jackson versions
-        //force "com.fasterxml.jackson.module:jackson-module-scala_2.11:2.9.5"
-    }
-}
-
 dependencies {
 
     def sparkVersion = "2.4.3"
     def scalaBuildVersion = "2.11"
 
-    //implementation "com.amazonaws:aws-java-sdk-s3:1.11.526"
-    implementation("org.apache.spark:spark-core_${scalaBuildVersion}:${sparkVersion}") {
-        exclude module: "org.apache.hadoop"
-    }
-    implementation("org.apache.spark:spark-sql_${scalaBuildVersion}:${sparkVersion}") {
-        exclude module: "org.apache.hadoop"
-    }
-    implementation("org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}") {
-        exclude module: "org.apache.hadoop"
+    implementation("org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}")
+
+    constraints {
+        implementation("org.apache.hadoop:hadoop-client:3.2.0") {
+            because "override 2.6.5 requested by spark-core to match hadoop-aws"
+        }
+        implementation("com.fasterxml.jackson.module:jackson-module-scala_${scalaBuildVersion}:2.9.5") {
+            because "override 2.6.7.1 requested by spark-core to match hadoop jars"
+        }
     }
     // todo: add hive
 
     // could use hadoop-cloud-storage to include azure etc.
-
     implementation "org.apache.hadoop:hadoop-aws:3.2.0"
-    implementation("org.apache.hadoop:hadoop-common:3.2.0") {
-        // don't bring in a newer version of jackson that conflicts with
-        // spark-core which uses com.fasterxml.jackson.module:jackson-module-scala_2.11:2.6.7.1
-        exclude module: "jackson-databind"
-    }
 
     testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.0.5"
     testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.5"
