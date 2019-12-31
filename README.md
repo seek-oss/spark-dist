@@ -11,8 +11,9 @@ Common practice is to use hadoop-aws 2.7.3 as follows:
 ```
 pyspark --packages "org.apache.hadoop:hadoop-aws:2.7.3" --driver-java-options "-Dspark.hadoop.fs.s3.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"
 ```
-However later versions of hadoop-aws cannot be used this way without errors. 
-This distribution uses gradle to resolve a correct set of newer hadoop-aws dependencies that work with Spark.  
+However later versions of hadoop-aws cannot be used this way without errors. Resolving dependencies at startup is also slow.
+
+This distribution bundles a correct set of newer hadoop-aws dependencies that work with Spark.  
 
 Later versions of hadoop-aws contain the following new features:
 * [2.8 release line](http://hadoop.apache.org/docs/r2.8.0/index.html) contains S3A improvements to 
@@ -20,7 +21,8 @@ support any AWSCredentialsProvider
 * [2.9 release line](http://hadoop.apache.org/docs/r2.9.0/index.html) contains 
 [S3Guard](http://hadoop.apache.org/docs/r2.9.0/hadoop-aws/tools/hadoop-aws/s3guard.html) which provides 
 consistency and metadata caching for S3A via a backing DynamoDB metadata store.
-* [3.1 release line](http://hadoop.apache.org/docs/r3.1.0/index.html) incorporates HADOOP-13786 which 
+Supports SSE-KMS and SSE-C ([HADOOP-13075](https://issues.apache.org/jira/browse/HADOOP-13075))
+* [3.1 release line](http://hadoop.apache.org/docs/r3.1.0/index.html) incorporates [HADOOP-13786](https://issues.apache.org/jira/browse/HADOOP-13786) which 
 contains optimised job committers including the Netflix staging committers (Directory and Partitioned) 
 and the Magic committers. See [committers](https://github.com/apache/hadoop/blob/branch-3.1/hadoop-tools/hadoop-aws/src/site/markdown/tools/hadoop-aws/committers.md) and [committer architecture](https://github.com/apache/hadoop/blob/trunk/hadoop-tools/hadoop-aws/src/site/markdown/tools/hadoop-aws/committer_architecture.md).
 S3A metrics can now be monitored through Hadoop's metrics2 framework, see [Metrics](https://hadoop.apache.org/docs/r3.1.0/hadoop-aws/tools/hadoop-aws/index.html#Metrics). The is configured via `hadoop-metrics2.properties`.

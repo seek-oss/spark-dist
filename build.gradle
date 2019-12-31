@@ -1,6 +1,6 @@
 plugins {
     id 'scala'
-    id 'com.github.maiflai.scalatest' version '0.24'
+    id 'com.github.maiflai.scalatest' version '0.25'
 }
 
 sourceCompatibility = 1.8
@@ -11,28 +11,26 @@ repositories {
 }
 
 
-configurations.all {
-    exclude group: 'commons-logging', module: 'commons-logging'
-    resolutionStrategy {
-        // because hadoop-common brings different jackson versions
-        force "com.fasterxml.jackson.core:jackson-core:2.7.8"
-        force "com.fasterxml.jackson.core:jackson-databind:2.7.8"
-        force "com.fasterxml.jackson.module:jackson-module-scala_2.11:2.7.8"
-    }
-}
-
 dependencies {
 
-    def sparkVersion = "2.3.2"
+    def sparkVersion = "2.4.3"
     def scalaBuildVersion = "2.11"
+    def hadoopVersion = "3.1.3"
 
-    implementation "com.amazonaws:aws-java-sdk-s3:1.11.526"
-    implementation "org.apache.spark:spark-core_${scalaBuildVersion}:${sparkVersion}"
-    implementation "org.apache.spark:spark-sql_${scalaBuildVersion}:${sparkVersion}"
-    implementation "org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}"
+    implementation("org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}")
 
-    implementation "org.apache.hadoop:hadoop-aws:3.1.1"
-    implementation "org.apache.hadoop:hadoop-common:3.1.1"
+    constraints {
+        implementation("org.apache.hadoop:hadoop-client:${hadoopVersion}") {
+            because "override 2.6.5 requested by spark-core to match hadoop-aws"
+        }
+        implementation("com.fasterxml.jackson.module:jackson-module-scala_${scalaBuildVersion}:2.9.5") {
+            because "override 2.6.7.1 requested by spark-core to match hadoop jars"
+        }
+    }
+    // todo: add hive
+
+    // could use hadoop-cloud-storage to include azure etc.
+    implementation "org.apache.hadoop:hadoop-aws:${hadoopVersion}"
 
     testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.0.5"
     testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.5"
@@ -43,14 +41,18 @@ dependencies {
 }
 
 task jars() {
-    delete 'jars/'
-    copy {
-        from sourceSets.main.runtimeClasspath
-        into 'jars/'
+    doLast {
+        delete 'jars/'
+        copy {
+            from sourceSets.main.runtimeClasspath
+            into 'jars/'
+        }
     }
 }
 
 // prints out jars for recording in the build log
 task printJars {
-    sourceSets.main.runtimeClasspath.sort().each { println it }
+    doLast {
+        sourceSets.main.runtimeClasspath.sort().each { println it }
+    }
 }
