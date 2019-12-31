@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
 
-    def sparkVersion = "2.4.3"
+    def sparkVersion = "2.4.4"
     def scalaBuildVersion = "2.11"
     def hadoopVersion = "3.1.3"
 
