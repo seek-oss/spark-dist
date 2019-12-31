@@ -15,11 +15,12 @@ dependencies {
 
     def sparkVersion = "2.4.3"
     def scalaBuildVersion = "2.11"
+    def hadoopVersion = "3.1.3"
 
     implementation("org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}")
 
     constraints {
-        implementation("org.apache.hadoop:hadoop-client:3.2.0") {
+        implementation("org.apache.hadoop:hadoop-client:${hadoopVersion}") {
             because "override 2.6.5 requested by spark-core to match hadoop-aws"
         }
         implementation("com.fasterxml.jackson.module:jackson-module-scala_${scalaBuildVersion}:2.9.5") {
@@ -29,7 +30,7 @@ dependencies {
     // todo: add hive
 
     // could use hadoop-cloud-storage to include azure etc.
-    implementation "org.apache.hadoop:hadoop-aws:3.2.0"
+    implementation "org.apache.hadoop:hadoop-aws:${hadoopVersion}"
 
     testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.0.5"
     testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.5"
