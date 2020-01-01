@@ -19,6 +19,11 @@ dependencies {
 
     implementation("org.apache.spark:spark-repl_${scalaBuildVersion}:${sparkVersion}")
 
+    // exclude hive because it doesn't work with hadoop 3 see HIVE-15326
+    // work to fix this for spark is tracked in SPARK-23710
+
+    // implementation("org.apache.spark:spark-hive_${scalaBuildVersion}:${sparkVersion}")
+
     constraints {
         implementation("org.apache.hadoop:hadoop-client:${hadoopVersion}") {
             because "override 2.6.5 requested by spark-core to match hadoop-aws"
@@ -27,7 +32,6 @@ dependencies {
             because "override 2.6.7.1 requested by spark-core to match hadoop jars"
         }
     }
-    // todo: add hive
 
     // could use hadoop-cloud-storage to include azure etc.
     implementation "org.apache.hadoop:hadoop-aws:${hadoopVersion}"
