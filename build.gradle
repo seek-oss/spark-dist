@@ -28,7 +28,7 @@ dependencies {
         implementation("org.apache.hadoop:hadoop-client:${hadoopVersion}") {
             because "override 2.6.5 requested by spark-core to match hadoop-aws"
         }
-        implementation("com.fasterxml.jackson.module:jackson-module-scala_${scalaBuildVersion}:2.9.5") {
+        implementation("com.fasterxml.jackson.module:jackson-module-scala_${scalaBuildVersion}:2.10.2") {
             because "override 2.6.7.1 requested by spark-core to match hadoop jars"
         }
     }
