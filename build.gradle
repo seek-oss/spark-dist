@@ -37,7 +37,7 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-aws:${hadoopVersion}"
 
     testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.0.5"
-    testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.5"
+    testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.6"
 
     // used by com.github.maiflai.scalatest
     testRuntimeOnly 'org.pegdown:pegdown:1.6.0'
