@@ -36,7 +36,7 @@ dependencies {
     // could use hadoop-cloud-storage to include azure etc.
     implementation "org.apache.hadoop:hadoop-aws:${hadoopVersion}"
 
-    testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.0.5"
+    testImplementation "org.scalatest:scalatest_${scalaBuildVersion}:3.3.0-SNAP2"
     testImplementation "io.findify:s3mock_${scalaBuildVersion}:0.2.6"
 
     // used by com.github.maiflai.scalatest
