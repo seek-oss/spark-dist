@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "19:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: com.fasterxml.jackson.module:jackson-module-scala_2.11
+    versions:
+    - 2.12.2
+  - dependency-name: com.github.maiflai.scalatest
+    versions:
+    - "0.30"
